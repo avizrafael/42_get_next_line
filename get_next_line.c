@@ -6,7 +6,7 @@
 /*   By: raviz-es <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:15:33 by raviz-es          #+#    #+#             */
-/*   Updated: 2023/11/22 14:57:57 by raviz-es         ###   ########.fr       */
+/*   Updated: 2023/11/22 15:12:16 by raviz-es         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,34 @@
 char	*get_next_line(int fd)
 {
 	char	*next_line;
-	char	*line;
+	char	*str;
 	int		i;
 
-	line = str_new(BUFFER_SIZE);
-	if (!line)
+	str = str_new(BUFFER_SIZE);
+	if (!str)
 		return (NULL);
 	i = 1;
 	while (i > 0)
 	{
-		i = read(fd, line, BUFFER_SIZE);
+		i = read(fd, str, BUFFER_SIZE);
 		if (i < 0)
 			return (NULL);
-		if (*line == '\n')
+		if (*str == '\n')
 			break ;
-		next_line = ft_strjoinmod(next_line, line);
+		next_line = ft_strjoinmod(next_line, str);
 		if (!next_line)
 			return (NULL);
 	}
-	free(line);
+	free(str);
 	return (next_line);
 }
 
+/*
 int main()
 {
     int	fd;
 
 	fd = open("file.txt", O_RDONLY);
+	return (0);
 }
+*/
