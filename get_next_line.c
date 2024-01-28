@@ -6,11 +6,20 @@
 /*   By: raviz-es <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:15:33 by raviz-es          #+#    #+#             */
-/*   Updated: 2024/01/28 15:53:59 by raviz-es         ###   ########.fr       */
+/*   Updated: 2024/01/28 16:59:47 by raviz-es         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_free(char *res, char *buffer)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(res, buffer);
+	free(res);
+	return (tmp);
+}
 
 char	*ft_next(char *buffer)
 {
@@ -19,9 +28,6 @@ char	*ft_next(char *buffer)
 	char	*line;
 
 	i = 0;
-	j = 0;
-	if (!buffer[i])
-		return (NULL);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (!buffer[i])
@@ -29,8 +35,9 @@ char	*ft_next(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	line = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(char));
+	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
 	i++;
+	j = 0;
 	while (buffer[i])
 		line[j++] = buffer[i++];
 	free(buffer);
@@ -77,7 +84,8 @@ char	*read_file(int fd, char *res)
 			free(buffer);
 			return (NULL);
 		}
-		res = ft_strjoin(res, buffer);
+		buffer[bytes_read] = 0;
+		res = ft_free(res, buffer);
 	}
 	free(buffer);
 	return (res);
