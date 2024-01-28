@@ -6,43 +6,94 @@
 /*   By: raviz-es <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:15:33 by raviz-es          #+#    #+#             */
-/*   Updated: 2023/12/19 16:10:04 by raviz-es         ###   ########.fr       */
+/*   Updated: 2024/01/28 15:53:59 by raviz-es         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*ft_next(char *buffer)
+{
+	int		i;
+	int		j;
+	char	*line;
+
+	i = 0;
+	j = 0;
+	if (!buffer[i])
+		return (NULL);
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (!buffer[i])
+	{
+		free(buffer);
+		return (NULL);
+	}
+	line = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(char));
+	i++;
+	while (buffer[i])
+		line[j++] = buffer[i++];
+	free(buffer);
+	return (line);
+}
+
+char	*ft_line(char *buffer)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	if (!buffer[i])
+		return (NULL);
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	line = ft_calloc(i + 2, sizeof(char));
+	i = 0;
+	while (buffer[i] && buffer[i] != '\n')
+	{
+		line[i] = buffer[i];
+		i++;
+	}
+	if (buffer[i] && buffer[i] == '\n')
+		line[i++] = '\n';
+	return (line);
+}
+
+char	*read_file(int fd, char *res)
+{
+	char	*buffer;
+	int		bytes_read;
+
+	if (!res)
+		res = ft_calloc(1, 1);
+
+	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	bytes_read = 1;
+	while (bytes_read > 0 && !ft_strchr(res, '\n'))
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		res = ft_strjoin(res, buffer);
+	}
+	free(buffer);
+	return (res);
+}
+
 char	*get_next_line(int fd)
 {
-	char	*next_line;
-	char	*str;
-	int		i;
+	static char	*buffer;
+	char		*line;
 
-	str = str_new(BUFFER_SIZE);
-	if (!str)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	i = 1;
-	while (i > 0)
-	{
-		i = read(fd, str, BUFFER_SIZE);
-		if (i < 0)
-			return (NULL);
-		if (*str == '\n')
-			break ;
-		next_line = ft_strjoinmod(next_line, str);
-		if (!next_line)
-			return (NULL);
-	}
-	free(str);
-	return (next_line);
+	buffer = read_file(fd, buffer);
+	if (!buffer)
+		return (NULL);
+	line = ft_line(buffer);
+	buffer = ft_next(buffer);
+	return (line);
 }
-
-/*
-int main()
-{
-    int	fd;
-
-	fd = open("file.txt", O_RDONLY);
-	return (0);
-}
-*/

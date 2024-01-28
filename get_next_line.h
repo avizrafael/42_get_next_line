@@ -6,7 +6,7 @@
 /*   By: raviz-es <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:28:01 by raviz-es          #+#    #+#             */
-/*   Updated: 2023/11/22 15:14:39 by raviz-es         ###   ########.fr       */
+/*   Updated: 2024/01/28 16:20:45 by raviz-es         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <limits.h>
 
 char	*get_next_line(int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(char const *str, int c);
+
+void	ft_bzero(void *str, size_t n);
+void	*ft_calloc(size_t nitems, size_t size);
+
 size_t	ft_strlen(const char *str);
-char	*str_new(size_t n);
-char	*ft_strjoinmod(char const *s1, char const *s2);
 
 #endif
