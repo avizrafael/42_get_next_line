@@ -6,7 +6,7 @@
 /*   By: raviz-es <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:28:01 by raviz-es          #+#    #+#             */
-/*   Updated: 2024/01/28 17:31:44 by raviz-es         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:23:21 by raviz-es         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-# include <sys/types.h>
-# include <sys/uio.h>
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);

@@ -6,13 +6,13 @@
 /*   By: raviz-es <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:15:33 by raviz-es          #+#    #+#             */
-/*   Updated: 2024/01/31 11:10:08 by raviz-es         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:19:20 by raviz-es         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*ft_free(char *res, char *buffer)
+char	*ft_join_and_free(char *res, char *buffer)
 {
 	char	*tmp;
 
@@ -84,7 +84,7 @@ char	*read_file(int fd, char *res)
 			return (NULL);
 		}
 		buffer[bytes_read] = 0;
-		res = ft_free(res, buffer);
+		res = ft_join_and_free(res, buffer);
 	}
 	free(buffer);
 	return (res);
