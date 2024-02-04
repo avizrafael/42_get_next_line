@@ -6,7 +6,7 @@
 /*   By: raviz-es <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:35:45 by raviz-es          #+#    #+#             */
-/*   Updated: 2024/02/04 15:16:41 by raviz-es         ###   ########.fr       */
+/*   Updated: 2024/02/04 15:40:10 by raviz-es         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(void)
 		if (line == NULL)
 			break ;
 		count++;
-		printf("[%d]:%s\n", count, line);
+		printf("[%d]:%s", count, line);
 		free(line);
 		line = NULL;
 	}
