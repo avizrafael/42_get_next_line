@@ -6,7 +6,7 @@
 /*   By: raviz-es <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:15:33 by raviz-es          #+#    #+#             */
-/*   Updated: 2024/02/04 21:34:14 by raviz-es         ###   ########.fr       */
+/*   Updated: 2024/02/04 22:10:31 by raviz-es         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ char	*ft_join_and_free(char *res, char *buffer)
 	return (tmp);
 }
 
-char	*ft_next(char *buffer)
+char	*ft_next_line(char *buffer)
 {
 	int		i;
 	int		j;
-	char	*line;
+	char	*next_line;
 
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
@@ -35,13 +35,13 @@ char	*ft_next(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	next_line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
 	i++;
 	j = 0;
 	while (buffer[i])
-		line[j++] = buffer[i++];
+		next_line[j++] = buffer[i++];
 	free(buffer);
-	return (line);
+	return (next_line);
 }
 
 char	*ft_line(char *buffer)
@@ -101,6 +101,6 @@ char	*get_next_line(int fd)
 	if (!buffer[fd])
 		return (NULL);
 	line = ft_line(buffer[fd]);
-	buffer[fd] = ft_next(buffer[fd]);
+	buffer[fd] = ft_next_line(buffer[fd]);
 	return (line);
 }
