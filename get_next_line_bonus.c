@@ -6,7 +6,7 @@
 /*   By: raviz-es <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:15:33 by raviz-es          #+#    #+#             */
-/*   Updated: 2024/02/06 14:48:23 by raviz-es         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:33:02 by raviz-es         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ char	*read_file(int fd, char *res)
 		if (bytes_read < 0)
 		{
 			free(buffer);
+			free(res);
 			return (NULL);
 		}
 		buffer[bytes_read] = 0;
@@ -92,7 +93,7 @@ char	*read_file(int fd, char *res)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[OPEN_MAX];
+	static char	*buffer[2000];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
